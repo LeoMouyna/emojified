@@ -5,8 +5,8 @@
       "target": "es6",
       "esModuleInterop": true,
       "sourceMap": true,
-      "rootDir": "src",
-      "outDir": "dist",
+      "rootDir": "./src",
+      "outDir": "./dist",
       "noEmitOnError": true,
       "typeRoots": [ "node_modules/@types" ]
    }
