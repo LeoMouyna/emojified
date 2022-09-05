@@ -1,10 +1,10 @@
-export function emojify(text: string): string {
+function emojify(text: string): string {
   return text
     .replace(/[^\w^-]dog[ '.,;!?]/gim, " 🐶$&")
     .replace(/[^\w^-]wolf[ '.,;!?]/gim, " 🐺$&");
 }
 
-export function sanitize(htmlContent: string): string {
+function sanitize(htmlContent: string): string {
   return htmlContent
     .replace(/<\/?[\w \=\"\'\-\_\:\;\(\)\,\/]+\/?>/gm, " $& ")
     .replace(/ +/gm, " ")
@@ -54,6 +54,3 @@ export function resetContent(): void {
   console.info(`start page reset`);
   window.location.reload();
 }
-
-export const toTestEmojify = emojify;
-export const ToTestSanitize = sanitize;
