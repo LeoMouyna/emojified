@@ -6,7 +6,7 @@ function emojify(text: string): string {
 
 function sanitize(htmlContent: string): string {
   return htmlContent
-    .replace(/<\/?[\w \=\"\'\-\_\:\;\(\)\,\/]+\/?>/gm, " $& ")
+    .replace(/<\/?[\w \=\"\'\-\_\:\;\(\)\,\/\.]+\/?>/gm, " $& ")
     .replace(/ +/gm, " ")
     .trim();
 }

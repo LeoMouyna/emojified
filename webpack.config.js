@@ -5,10 +5,14 @@ module.exports = {
   mode: "production",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "background.js",
+    filename: "[name].js",
   },
+  devtool: "source-map",
   resolve: {
     extensions: [".ts", ".js"],
+  },
+  entry: {
+    background: "./src/index.ts",
   },
   module: {
     rules: [

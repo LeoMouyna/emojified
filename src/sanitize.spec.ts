@@ -32,5 +32,14 @@ describe("Sanitize html content", () => {
         expect(SanitizeHtmlService.sanitize(htmlContent)).toBe(expected);
       });
     });
+    describe("when tag property has a '.'", () => {
+      it("should add spaces between tag and it content only", () => {
+        const htmlContent =
+          '<a href="/wiki/File:A_dog_making_noises_and_barking.flac" title="File:A dog making noises and barking.flac">Dog sounds</a>';
+        const expected =
+          '<a href="/wiki/File:A_dog_making_noises_and_barking.flac" title="File:A dog making noises and barking.flac"> Dog sounds </a>';
+        expect(SanitizeHtmlService.sanitize(htmlContent)).toBe(expected);
+      });
+    });
   });
 });
