@@ -24,4 +24,11 @@ describe("Emojify text", () => {
     expect(EmojifyService.emojify(questionMark)).toBe("the 🐺 wolf?");
     expect(EmojifyService.emojify(exclamationMark)).toBe("the 🐺 wolf!");
   });
+  it("should handle presentation sentence", () => {
+    const sentence =
+      "The hungry purple dinosaur ate the kind, zingy fox, the jabbering crab, and the mad whale and started vending and quacking. The quick brown fox jumped over the lazy dog.";
+    const expected =
+      "The hungry 🟣 purple 🦖 dinosaur ate the kind, zingy 🦊 fox, the jabbering 🦀 crab, and the 🤪 mad 🐋 whale and started 🤑 vending and 🦆 quacking. The quick 🟤 brown 🦊 fox jumped over the lazy 🐶 dog.";
+    expect(EmojifyService.emojify(sentence)).toBe(expected);
+  });
 });
