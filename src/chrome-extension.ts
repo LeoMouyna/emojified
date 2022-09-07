@@ -5,7 +5,9 @@ export interface StorageService {
   get<T = any>(key: string): Promise<T | undefined>;
 }
 
-const ACTIVE_KEY = "active";
+const ACTIVE_STATUS_KEY = "active";
+const INACTIVE_ICON = "assets/icon-inactive_16.png";
+const ACTIVE_ICON = "assets/icon-active_16.png";
 
 export class ChromeExtenstion {
   constructor(private readonly storageService: StorageService) {
@@ -14,28 +16,48 @@ export class ChromeExtenstion {
 
   private setup() {
     chrome.runtime.onInstalled.addListener(async () => {
-      await this.storageService.set({ [ACTIVE_KEY]: false });
+      await this.updateExtensionStatus();
+      this.updateExtensionIcon();
       console.info("emojified installation done");
     });
 
     chrome.action.onClicked.addListener(async (tab) => {
       try {
-        const previouslyActive =
-          (await this.storageService.get(ACTIVE_KEY)) ?? false;
-        const active = !previouslyActive;
-        const script = active ? emojifyContent : resetContent;
+        const previousActiveStatus =
+          (await this.storageService.get(ACTIVE_STATUS_KEY)) ?? false;
         await Promise.all([
-          this.storageService.set({ active }),
-          chrome.scripting.executeScript({
-            target: { tabId: tab.id ? tab.id : -1 },
-            func: script,
-            args: [],
-          }),
+          this.updateExtensionStatus(previousActiveStatus),
+          this.updateExtensionIcon(previousActiveStatus),
+          this.updateWebPageContent(previousActiveStatus, tab),
         ]);
-        console.log("action done");
       } catch (e) {
         console.error(e);
       }
+    });
+  }
+
+  private async updateExtensionStatus(previousActiveStatus: boolean = true) {
+    return this.storageService.set({
+      [ACTIVE_STATUS_KEY]: !previousActiveStatus,
+    });
+  }
+
+  private updateExtensionIcon(previousActiveStatus: boolean = true) {
+    const active = !previousActiveStatus;
+    const icon = active ? ACTIVE_ICON : INACTIVE_ICON;
+    return chrome.action.setIcon({ path: icon });
+  }
+
+  private async updateWebPageContent(
+    previousActiveStatus: boolean,
+    tab: chrome.tabs.Tab
+  ) {
+    const active = !previousActiveStatus;
+    const script = active ? emojifyContent : resetContent;
+    return chrome.scripting.executeScript({
+      target: { tabId: tab.id ? tab.id : -1 },
+      func: script,
+      args: [],
     });
   }
 }

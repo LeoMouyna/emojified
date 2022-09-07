@@ -1,11 +1,17 @@
 {
-  "name": "Chrome Extension Starter",
-  "description": "Starter kit for chrome extension on ts",
+  "name": "Emojified",
+  "description": "Reading assistant using emojis",
   "version": "1.0",
   "manifest_version": 3,
   "permissions": ["activeTab", "scripting", "storage"],
   "background": {
     "service_worker": "background.js"
   },
-  "action": {}
+  "action": {},
+  "icons": {
+    "16": "assets/icon-active_16.png",
+    "32": "assets/icon-active_32.png",
+    "48": "assets/icon-active_48.png",
+    "128": "assets/icon-active_128.png"
+  }
 }

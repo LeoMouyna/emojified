@@ -1,1 +1,3 @@
-# Starter kit for chrome extension on ts
+# Emojified
+
+A Google Chrome extension that helps people to read using emojis.
