@@ -1,4 +1,4 @@
-import { StorageService } from "./chrome-extension";
+import { StorageService } from "./storage.interface";
 
 export class LocalStorageService implements StorageService {
   async get<T = any>(key: string): Promise<T | undefined> {

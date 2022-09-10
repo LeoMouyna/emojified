@@ -1,0 +1,16 @@
+export const emojis: Record<string, string> = {
+  dog: "🐶",
+  dogs: "🐶",
+  puppy: "🐶",
+  wolf: "🐺",
+  wolves: "🐺",
+  purple: "🟣",
+  dinosaur: "🦖",
+  fox: "🦊",
+  mad: "🤪",
+  crab: "🦀",
+  vending: "🤑",
+  quacking: "🦆",
+  brown: "🟤",
+  whale: "🐋",
+};

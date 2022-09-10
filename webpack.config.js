@@ -12,7 +12,7 @@ module.exports = {
     extensions: [".ts", ".js"],
   },
   entry: {
-    background: "./src/index.ts",
+    background: "./src/background.ts",
   },
   module: {
     rules: [
