@@ -1,10 +1,8 @@
 export class EmojifyService {
-  constructor(private emojis: Record<string, string>) {}
-
-  emojify(text: string): string {
+  async emojify(text: string, emojis: Record<string, string>): Promise<string> {
     const syntaxeBlocks = this.splitSentencesToTextBlocks(text);
     const emojifiedWords = syntaxeBlocks.map((sentence) =>
-      sentence.map((block) => this.addEmojisToTextBlocks(block))
+      sentence.map((block) => this.addEmojisToTextBlocks(block, emojis))
     );
     const emojifiedSentences = emojifiedWords.map((sentence) =>
       sentence.join(" ")
@@ -12,13 +10,13 @@ export class EmojifyService {
     return emojifiedSentences.join(".");
   }
 
-  private addEmojisToTextBlocks(textBlock: string) {
+  private addEmojisToTextBlocks(textBlock: string, emojis: Record<string, string>) {
     const words = textBlock.match(/^\w+/gm);
     if (!words?.length) {
       return textBlock;
     }
     const word = words[0];
-    const emoji = this.emojis[word.toLowerCase()];
+    const emoji = emojis[word.toLowerCase()];
     return emoji ? `${emoji} ${textBlock}` : textBlock;
   }
 

@@ -5,6 +5,8 @@ import { LocalStorageService, StorageService } from "./storage";
 const ACTIVE_STATUS_KEY = "active";
 const INACTIVE_ICON = "assets/icon-inactive_16.png";
 const ACTIVE_ICON = "assets/icon-active_16.png";
+const EMOJI_DICTIONARY = "emojiDictionary";
+let localStorageDict: Record<string, string> = {};
 
 function reload() {
   return window.location.reload();
@@ -47,6 +49,7 @@ export class ChromeExtenstion {
           this.updateExtensionStatus(previousActiveStatus),
           this.updateExtensionIcon(previousActiveStatus),
           this.updateWebPageContent(previousActiveStatus, tab),
+          this.setUpEmojiDictionary(),
         ]);
       } catch (e) {
         console.error(e);
@@ -60,6 +63,17 @@ export class ChromeExtenstion {
     });
   }
 
+  private async setUpEmojiDictionary() {
+    const dictionary = await this.storageService.get(EMOJI_DICTIONARY);
+    if (dictionary !== undefined) {
+      localStorageDict = dictionary;
+    }
+    else {
+      this.storageService.set({[EMOJI_DICTIONARY]: emojis});
+      localStorageDict = emojis;
+    }
+  }
+
   private updateExtensionIcon(previousActiveStatus: boolean = true) {
     const active = !previousActiveStatus;
     const icon = active ? ACTIVE_ICON : INACTIVE_ICON;
@@ -68,7 +82,7 @@ export class ChromeExtenstion {
 
   private async updateWebPageContent(
     previousActiveStatus: boolean,
-    tab: chrome.tabs.Tab
+    tab: chrome.tabs.Tab,
   ) {
     const active = !previousActiveStatus;
     if (!active) {
@@ -86,7 +100,7 @@ export class ChromeExtenstion {
       })
     )[0].result;
 
-    const emojifiedContent = this.emojify(content);
+    const emojifiedContent = await this.emojify(content);
 
     return chrome.scripting.executeScript({
       target: { tabId: tab.id ? tab.id : -1 },
@@ -95,17 +109,17 @@ export class ChromeExtenstion {
     });
   }
 
-  private emojify(content?: string): string {
+  private async emojify(content?: string): Promise<string> {
     if (!content) {
       return "";
     }
     const sanitizedContent = this.sanitizeService.sanitize(content);
-    return this.emojifyService.emojify(sanitizedContent);
+    return this.emojifyService.emojify(sanitizedContent, localStorageDict);
   }
 }
 
 const storageService = new LocalStorageService();
 const sanitizeService = new SanitizeHtmlService();
-const emofifyService = new EmojifyService(emojis);
+const emofifyService = new EmojifyService();
 
 new ChromeExtenstion(storageService, emofifyService, sanitizeService);
