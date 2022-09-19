@@ -19,7 +19,7 @@ export class EmojifyService {
     }
     const word = words[0];
     const emoji = this.emojis[word.toLowerCase()];
-    return emoji ? `${emoji} ${textBlock}` : textBlock;
+    return emoji ? `${emoji}${textBlock}` : textBlock;
   }
 
   private splitSentencesToTextBlocks(text: string): string[][] {
