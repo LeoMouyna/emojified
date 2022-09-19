@@ -1,5 +1,4 @@
-import { EmojifyService, emojis } from "./emojify";
-import { SanitizeHtmlService } from "./sanitize";
+import { EmojifyHtmlService, emojis } from "./emojify";
 import { LocalStorageService, StorageService } from "./storage";
 
 const ACTIVE_STATUS_KEY = "active";
@@ -26,8 +25,7 @@ function getBody() {
 export class ChromeExtenstion {
   constructor(
     private readonly storageService: StorageService,
-    private readonly emojifyService: EmojifyService,
-    private readonly sanitizeService: SanitizeHtmlService
+    private readonly emojifyService: EmojifyHtmlService
   ) {
     this.setup();
   }
@@ -99,13 +97,11 @@ export class ChromeExtenstion {
     if (!content) {
       return "";
     }
-    const sanitizedContent = this.sanitizeService.sanitize(content);
-    return this.emojifyService.emojify(sanitizedContent);
+    return this.emojifyService.emojify(content);
   }
 }
 
 const storageService = new LocalStorageService();
-const sanitizeService = new SanitizeHtmlService();
-const emofifyService = new EmojifyService(emojis);
+const emojifyService = new EmojifyHtmlService(emojis);
 
-new ChromeExtenstion(storageService, emofifyService, sanitizeService);
+new ChromeExtenstion(storageService, emojifyService);
