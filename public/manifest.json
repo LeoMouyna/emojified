@@ -3,7 +3,8 @@
   "description": "Reading assistant using emojis",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+  "host_permissions": ["https://*/*"],
   "background": {
     "service_worker": "background.js"
   },
