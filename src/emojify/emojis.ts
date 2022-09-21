@@ -49,7 +49,7 @@ export const emojis: Record<string, string> = {
   bisons: "🦬",
   cow: "🐮",
   cows: "🐮",
-  ox: "🐂", 
+  ox: "🐂",
   oxen: "🐂",
   buffalo: "🐃",
   buffalos: "🐃",
@@ -184,7 +184,7 @@ export const emojis: Record<string, string> = {
   serpent: "🐍",
   serpents: "🐍",
   dragon: "🐲",
-  fairy: "🐲", 
+  fairy: "🐲",
   brachiosaurus: "🦕",
   brontosaurus: "🦕",
   diplodocus: "🦕",
@@ -243,8 +243,8 @@ export const emojis: Record<string, string> = {
   malaria: "🦟",
   maggot: "🪰",
   pest: "🪰",
-  insect:  "🪰",
-  insects:  "🪰",
+  insect: "🪰",
+  insects: "🪰",
   worm: "🪱",
   earthworm: "🪱",
   parasite: "🪱",
@@ -368,8 +368,8 @@ export const emojis: Record<string, string> = {
   bamboo: "🎍",
   pine: "🎍",
   tanabata: "🎋",
-// from here no word variations
-// food and drink
+  // from here no word variations
+  // food and drink
   grapes: "🍇",
   melon: "🍈",
   watermelon: "🍉",
@@ -568,7 +568,7 @@ export const emojis: Record<string, string> = {
   violin: "🎻",
   drum: "🥁",
   cinema: "🎬",
-// travel and places
+  // travel and places
   boat: "🚣",
   mountain: "🏔️",
   volcano: "🌋",
@@ -645,7 +645,7 @@ export const emojis: Record<string, string> = {
   pound: "💷",
   moai: "🗿",
   customs: "🛃",
-// objects
+  // objects
   hole: "🕳️",
   bomb: "💣",
   bath: "🛀",
@@ -895,4 +895,14 @@ export const emojis: Record<string, string> = {
   england: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
   scotland: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
   wales: "🏴󠁧󠁢󠁷󠁬󠁳󠁿",
+  animal: "🐻",
+  animals: "🐻",
+  quizzes: "❓",
+  amphibian: "🐸",
+  amphibians: "🐸",
+  marine: "🌊",
+  tree: "🌳",
+  trees: "🌳",
+  fungi: "🍄",
+  mammals: "🐮",
 };
